@@ -1,0 +1,87 @@
+@import '../../assets/styles/globalVariables.scss';
+@import '../../assets/styles/globalMixins.scss';
+
+.form-container {
+    background: $form-bg;
+    margin: 15px;
+    padding: 10px 20px;
+    @include responsive($sm) {
+        padding: 30px 60px;
+    }
+    
+    border: 2px solid $red;
+    width: 90%;
+    border-radius: 10px;
+   
+    @include responsive($lg) {
+        width: 60%;
+    }
+    
+    h2 {
+        text-align: center;
+        color: $red;
+    }
+}
+
+.form {
+    input {
+        display: block;
+        width: 70%;
+        font-size: 20px;
+        line-height: 20px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        border: none;
+        border-bottom: 2px solid $varyDarkBlue;
+        background: $form-bg;
+        min-width: 250px;
+        padding-left: 5px;
+        outline: none;
+        color: $red;
+      }
+      
+      input:focus {
+        outline: 5px solid $grayishBlue;
+      }
+
+      input::placeholder {
+        font-size: 20px;
+        color: $grayishBlue;
+      }
+
+      & .form-buttons {
+        text-align: right;
+       
+        button {
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 10px;
+            color: white;
+            &:first-child {
+                background-color: $green;
+            }
+            &:nth-child(2) {
+                background-color: $red;
+            }
+            &:hover {
+                background-color: white;
+                color: black;
+                outline: 1px solid;
+            }
+        }
+      }
+}
+
+.dropdown {
+    label {
+        font-size: 20px;
+    }
+
+    select {
+        margin-left: 10px;
+        font-size: 15px;
+    }
+}
+
+
+  

@@ -1,0 +1,13 @@
+@import '../../assets/styles/globalMixins.scss';
+@import '../../assets/styles/globalVariables.scss';
+
+.container {
+    @include grid(1);
+    @include responsive( $med ) {
+        @include grid(2);
+    };
+    
+    @include responsive( $lg ) {
+        @include grid(4);
+    };
+}
