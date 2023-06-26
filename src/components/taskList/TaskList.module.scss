@@ -1,0 +1,25 @@
+@import '../../assets/styles/globalVariables.scss';
+
+.task-list {
+    &.blue {
+        color: $blue;
+    }
+
+    &.red {
+        color: $red;
+    }
+
+    &.orange {
+        color: $orange;
+    }
+
+    &.green {
+        color: $green;
+    }
+
+    .task-status {
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 3px;
+    }
+}

@@ -1,0 +1,62 @@
+@import '../../assets/styles/globalVariables.scss';
+@import '../../assets/styles/globalMixins.scss';
+
+.task-card {  
+        border-radius: 5px;
+        box-shadow: 0px 6px 10px $grayishBlue;
+        padding: 10px 15px 20px 15px;
+
+        @include responsive($lg) {
+            padding: 10px 30px 60px 30px;
+        }
+        
+        margin: 20px auto;  
+        position: relative;
+        word-wrap: break-word;
+
+        @include responsive($lg) {
+            max-width: 320px;
+        }
+
+        @include responsive($lg) {
+            max-width: 320px;
+        }
+
+        &.blue {
+            border-top: 3px solid $blue;
+        }
+
+        &.red {
+            border-top: 3px solid $red;
+        }
+
+        &.yellow {
+            border-top: 3px solid $orange;
+        }
+
+        &.green {
+            border-top: 3px solid $green;
+        }   
+
+        img {
+            width: 90px;
+            position: absolute;
+            display: block;
+            bottom: 0;
+            right: 0;
+            padding: 10px;          
+        }
+        
+        p {
+            margin: 10px;
+            text-align: left;          
+        }
+        
+        h2 {
+            margin:10px;
+            text-align: left;       
+        }
+}
+
+
+

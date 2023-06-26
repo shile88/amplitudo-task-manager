@@ -1,0 +1,20 @@
+button {
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+}
+
+button:disabled,
+button[disabled] {
+    cursor: not-allowed;
+}
+
+html {
+    font-family: 'Gilroy-Regular', sans-serif;
+}

@@ -1,0 +1,45 @@
+@import '../../assets/styles/globalVariables.scss';
+@import '../../assets/styles/globalMixins.scss';
+
+.input-wrapper {
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.input { 
+        width: 80%;
+        @include responsive($sm) {
+            width: 70%;
+        }
+        @include responsive($med) {
+            width: 50%;
+        }
+        padding: 12px 24px;       
+        font-size: 15px;
+        line-height: 18px;    
+        color: $blue;
+        border-radius: 50px;
+        text-transform: uppercase;
+        
+        border: 1px solid $varyDarkBlue;
+        transition: all 250ms ease-in-out;
+       
+        &::placeholder {
+            color: $grayishBlue;
+            text-transform: lowercase;
+            @include responsive($sm) {
+                text-transform: uppercase;
+            }
+            letter-spacing: 1.5px;
+        }
+        
+        &:hover,
+        &:focus {
+            padding: 12px 0;
+            outline: 0;
+            border: 1px solid transparent;
+            border-bottom: 3px solid $varyDarkBlue;
+            border-radius: 0;
+        }
+}
+

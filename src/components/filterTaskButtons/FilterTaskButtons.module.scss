@@ -1,0 +1,37 @@
+@import '../../assets/styles/globalVariables.scss';
+@import '../../assets/styles/globalMixins.scss';
+
+.filter-buttons-wrapper {
+    @include grid(3);
+    @include responsive($med) {
+        @include grid(6);
+    }
+}
+
+.wishlist {
+    @include button($blue, 15px);
+}
+
+.all-tasks {
+    @include button($veryLightGray, 15px);
+}
+
+.to-do {
+    @include button($yellow, 15px);
+}
+
+.in-progress {
+    @include button($orange, 15px);
+}
+
+.done {
+    @include button($green, 15pxg);
+}
+
+.deleted {
+    @include button($red, 15px);
+}
+
+.active {
+    border: 3px solid;
+}
