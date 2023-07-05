@@ -1,23 +1,25 @@
+import { useContext, useState } from "react";
+
 import SearchTask from "../../components/searchTask/SearchTask";
+import { TaskContext } from "../../components/context/TaskContext";
 import TaskList from "../../components/taskList/TaskList";
 import TasksWrapper from "../../components/tasksWrapper/TasksWrapper";
 import classes from "./Default.module.scss";
-import { useState } from "react";
 
-const Default = ({ tasks }) => {
+const Default = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const {state} = useContext(TaskContext);
 
   return (
     <div className={classes["default-container"]}>
       <SearchTask
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        tasks={tasks}
         setSearchResults={setSearchResults}
       />
 
-      {tasks.length === 0 ? (
+      {state.length === 0 ? (
         <h1>Currently no tasks. Click on top right button to add.</h1>
       ) : (
         <TasksWrapper>
@@ -25,7 +27,7 @@ const Default = ({ tasks }) => {
             tasks={
               searchTerm
                 ? searchResults.filter((task) => task.status === "wishlist")
-                : tasks.filter((task) => task.status === "wishlist")
+                : state.filter((task) => task.status === "wishlist")
             }
             status="Wishlist"
             color="blue"
@@ -34,7 +36,7 @@ const Default = ({ tasks }) => {
             tasks={
               searchTerm
                 ? searchResults.filter((task) => task.status === "to-do")
-                : tasks.filter((task) => task.status === "to-do")
+                : state.filter((task) => task.status === "to-do")
             }
             status="To-do"
             color="red"
@@ -43,7 +45,7 @@ const Default = ({ tasks }) => {
             tasks={
               searchTerm
                 ? searchResults.filter((task) => task.status === "in-progress")
-                : tasks.filter((task) => task.status === "in-progress")
+                : state.filter((task) => task.status === "in-progress")
             }
             status="In-progress"
             color="orange"
@@ -52,7 +54,7 @@ const Default = ({ tasks }) => {
             tasks={
               searchTerm
                 ? searchResults.filter((task) => task.status === "done")
-                : tasks.filter((task) => task.status === "done")
+                : state.filter((task) => task.status === "done")
             }
             status="Done"
             color="green"

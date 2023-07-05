@@ -4,7 +4,7 @@ import TasksTable from "../../components/tasksTable/TasksTable";
 import classes from "./Tasks.module.scss";
 import { useState } from "react";
 
-const Tasks = ({ tasks, setTasks }) => {
+const Tasks = () => {
   const [filterTasks, setFilterTasks] = useState("");
   const [formData, setFormData] = useState({
     openAddTask: false,
@@ -12,67 +12,24 @@ const Tasks = ({ tasks, setTasks }) => {
     taskID: "",
   });
 
-  const handleAddTask = (newTask) => {
-    const addedTasks = [
-      ...tasks,
-      {
-        id: tasks.length ? tasks.length : 0,
-        name: newTask.name,
-        description: newTask.description,
-        status: newTask.status,
-      },
-    ];
-    setTasks(addedTasks);
-  };
-
-  const handleEditTask = (editedTask) => {
-    const updatedTask = tasks.map((task) => {
-      if (task.id === formData.taskID) {
-        return {
-          ...task,
-          name: editedTask.name,
-          description: editedTask.description,
-          status: editedTask.status,
-        };
-      }
-      return task;
-    });
-    setTasks(updatedTask);
-  };
-
-  const handleDeleteTask = (id) => {
-    const deletedTask = tasks.map((task) => {
-      if (task.id === id) {
-        return {
-          ...task,
-          status: "deleted",
-        };
-      }
-      return task;
-    });
-    setTasks(deletedTask);
-  };
-
   return (
     <div className={classes.container}>
       <FilterTaskButtons setFilterTasks={setFilterTasks} formData={formData} />
 
       {(formData.openAddTask || formData.openEditTask) && (
         <TaskFormField
-          addTask={handleAddTask}
+          //addTask={handleAddTask}
           formData={formData}
           setFormData={setFormData}
-          tasks={tasks}
-          editTask={handleEditTask}
+          //editTask={handleEditTask}
         />
       )}
-      
+
       <TasksTable
-        tasks={tasks}
         filterTasks={filterTasks}
         setFormData={setFormData}
         formData={formData}
-        deleteTask={handleDeleteTask}
+        //deleteTask={handleDeleteTask}
       />
     </div>
   );

@@ -1,36 +1,43 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import DropDown from "./dropDown/DropDown";
+import Input from "./input/Input";
+import { TaskContext } from "../context/TaskContext";
 import classes from "./TaskFormField.module.scss";
 
-const TaskFormField = ({ addTask, formData, setFormData, tasks, editTask }) => {
+const TaskFormField = ({ formData, setFormData }) => {
+  const { state, dispatch } = useContext(TaskContext);
   const [formTaskData, setFormTaskData] = useState({
     name:
       formData.taskID || formData.taskID === 0
-        ? tasks[formData.taskID].name
+        ? state[formData.taskID].name
         : "",
     description:
       formData.taskID || formData.taskID === 0
-        ? tasks[formData.taskID].description
+        ? state[formData.taskID].description
         : "",
     status:
       formData.taskID || formData.taskID === 0
-        ? tasks[formData.taskID].status
+        ? state[formData.taskID].status
         : "wishlist",
+    id: 
+      formData.taskID || formData.taskID === 0
+        ? state[formData.taskID].id
+        : "",
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormTaskData((prevData) => ({ ...prevData, [name]: value }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!formData.taskID) {
-      addTask(formTaskData);
+      dispatch({ type: "ADD_TASK", payload: formTaskData });
       setFormData((prevState) => ({ ...prevState, openAddTask: false }));
     }
     if (formData.taskID || formData.taskID === 0) {
-      editTask(formTaskData);
+      dispatch({
+        type: "EDIT_TASK",
+        payload: formTaskData,
+      });
       setFormData((prevState) => ({ ...prevState, openEditTask: false }));
     }
 
@@ -52,49 +59,37 @@ const TaskFormField = ({ addTask, formData, setFormData, tasks, editTask }) => {
     <div className={classes["form-container"]}>
       {formData.openAddTask ? <h2>Add task</h2> : <h2>Edit task</h2>}
       <form onSubmit={handleSubmit} className={classes.form}>
-        <input
+        <Input
           name="name"
           type="text"
-          value={formTaskData.name}
-          onChange={handleChange}
+          defaultValue={formTaskData.name}
+          setFormTaskData={setFormTaskData}
           placeholder="Task name"
           required
         />
-
-        <input
+        <Input
           name="description"
           type="text"
-          value={formTaskData.description}
-          onChange={handleChange}
+          defaultValue={formTaskData.description}
+          setFormTaskData={setFormTaskData}
           placeholder="Task description"
           required
         />
-        <div className={classes.dropdown}>
-          <label>
-            Choose Status:
-            <select
-              name="status"
-              value={formTaskData.status}
-              onChange={handleChange}
-              required
-            >
-              <option value="wishlist">Wishlist</option>
 
-              <option value="to-do">To-do</option>
+        <DropDown
+          name="status"
+          value={formTaskData.status}
+          setFormTaskData={setFormTaskData}
+          required
+        />
 
-              <option value="in-progress">In-progress</option>
-
-              <option value="done">Done</option>
-            </select>
-          </label>
-          <div className={classes['form-buttons']}>
-            {formData.openAddTask ? (
-              <button type="submit">Add Task</button>
-            ) : (
-              <button type="submit">Edit Task</button>
-            )}
-            <button onClick={handleCloseForm}>Cancel</button>
-          </div>
+        <div className={classes["form-buttons"]}>
+          {formData.openAddTask ? (
+            <button type="submit">Add Task</button>
+          ) : (
+            <button type="submit">Edit Task</button>
+          )}
+          <button onClick={handleCloseForm}>Cancel</button>
         </div>
       </form>
     </div>
